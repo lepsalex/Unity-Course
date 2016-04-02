@@ -5,8 +5,6 @@
 -r:/opt/Unity/Editor/Data/Managed/UnityEngine.dll
 -r:/opt/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll
 -r:/opt/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll
--r:/opt/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll
--r:/opt/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll
 -r:/opt/Unity/Editor/Data/Managed/UnityEditor.dll
 -define:UNITY_5_3_OR_NEWER
 -define:UNITY_5_3_4

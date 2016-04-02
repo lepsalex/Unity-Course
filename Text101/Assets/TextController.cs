@@ -55,9 +55,7 @@ public class TextController : MonoBehaviour {
 		else if (myState == States.stairs_2)	{stairs_2();}
 	}
 
-	/*
-	 * Scene 1: The Cell
-	*/
+	#region Scene 1: The Cell (State Handler Methods)
 	void cell() {
 		text.text = "... what's going on, where am I? ...\n\n" +
 					"... I'm in a prison cell, but how did I get here? ... \n\n" +
@@ -93,7 +91,7 @@ public class TextController : MonoBehaviour {
 					" combination is made up of the numbers ... 1, 4, 8, and 9 ..." +
 					" I wonder ... 1984 ... it worked! That's strange, 1984 is the" +
 					" title of one my favourite books ...\n\n" +
-					"[Press R to Return, Press O to Open the door and continue into the Corridor]";
+					"[Press R to Return, Press O to Open the door and continue into corridor]";
 		if 		(Input.GetKeyDown(KeyCode.R)) 	{myState = States.cell_mirror;}
 		else if (Input.GetKeyDown(KeyCode.O)) 	{myState = States.corridor_0;}
 	}
@@ -124,64 +122,108 @@ public class TextController : MonoBehaviour {
 					"[Press R to Return]";
 		if 		(Input.GetKeyDown(KeyCode.R)) 	{myState = States.cell_mirror;}
 	}
-	/*
-	 * End Scene 1
-	*/
+	#endregion
 
-	/*
-	* Scene 2: The Corridor
-	*/
+	#region Scene 2: The Corridor (State Handler Methods)
 	void closet_door() {
+		text.text = "Damn, it's locked.\n\n" +
+					"[Press R to Return]";
 
+		if 		(Input.GetKeyDown(KeyCode.R)) 	{myState = States.corridor_0;}
 	}
 
 	void corridor_0() {
-		text.text = "TBD" +
-					" TBD ...\n\n" +
-					"[Press S for go into Stairwell, F to look at the Floor, or C" +
-					" to try the Closet door]";
+		text.text = "Time to get the hell out of dodge. Let's see, I see what looks" +
+					" like stairs, there's a door at the end of this corridor and" +
+					" I think I see something glistening on the floor ...\n\n" +
+					"[Press S for go up Stairs, F to take a better look at the Floor," +
+					" or C to try the Closet door]";
 
-		if 		(Input.GetKeyDown(KeyCode.S)) 	{myState = States.cell;}
-		else if (Input.GetKeyDown(KeyCode.C)) 	{myState = States.cell;}
-		else if (Input.GetKeyDown(KeyCode.F)) 	{myState = States.cell;}
+		if 		(Input.GetKeyDown(KeyCode.S)) 	{myState = States.stairs_0;}
+		else if (Input.GetKeyDown(KeyCode.F)) 	{myState = States.floor;}
+		else if (Input.GetKeyDown(KeyCode.C)) 	{myState = States.closet_door;}
 	}
 
 	void corridor_1() {
+		text.text = "Ok great, armed with a mighty hair clip, watch out guards ...\n\n" +
+					"... or I could try my hand at lock-picking ... \n\n" +
+					"[Press S to go up Stairs, or P to Pick the closet door lock]";
 
+		if 		(Input.GetKeyDown(KeyCode.S)) 	{myState = States.stairs_1;}
+		else if (Input.GetKeyDown(KeyCode.P)) 	{myState = States.in_closet;}
 	}
 
 	void corridor_2() {
+		text.text = "Ok, it's either go up these stairs and face these shadows" +
+					" or think of something a little more creative ...\n\n" +
+					"[Press S to go up Stairs, or B to go Back inside closet]";
 
+		if 		(Input.GetKeyDown(KeyCode.S)) 	{myState = States.stairs_2;}
+		else if (Input.GetKeyDown(KeyCode.B)) 	{myState = States.in_closet;}
 	}
 
 	void corridor_3() {
+		text.text = "Now this is more like it, I just hope they don't get a" +
+					" good look at me ... and I really hope these stairs lead somewhere ...\n\n" +
+					"[Press U to Undress, or S to take stairs to courtyard]";
 
+		if 		(Input.GetKeyDown(KeyCode.U)) 	{myState = States.in_closet;}
+		else if (Input.GetKeyDown(KeyCode.S)) 	{myState = States.courtyard;}
 	}
 
 	void courtyard() {
+		text.text = "... nice and easy ... I'm just another member of the staff ..." +
+					" nothing to ...\n\n" +
+					"What is this??? What happened to these guys? Looks like" +
+					" some sort of animal ripped them apart ...\n\n" +
+					"There's the door, I'm out of here!\n\n" +
+					"[Press P to Play again!]";
 
+		if 		(Input.GetKeyDown(KeyCode.P)) 	{myState = States.cell;}
 	}
 
 	void floor() {
+		text.text = "Hmm ... looks like a hair clip, could be useful ...\n\n" +
+					"[Press R to Return, or H to pick up Hairclip]";
 
+		if 		(Input.GetKeyDown(KeyCode.R)) 	{myState = States.corridor_0;}
+		else if (Input.GetKeyDown(KeyCode.H)) 	{myState = States.corridor_1;}
 	}
 
 	void in_closet() {
+		text.text = "It's just a closet, wonder if there is anything in here ...\n\n" +
+					"A maintenance uniform, I might be able to work with this ...\n\n" +
+					"[Press R to Return, or D to Dress up as maintenance staff and return]";
 
+		if 		(Input.GetKeyDown(KeyCode.R)) 	{myState = States.corridor_2;}
+		else if (Input.GetKeyDown(KeyCode.D)) 	{myState = States.corridor_3;}
 	}
 
 	void stairs_0() {
+		text.text = "I hope these stairs lead to the exit ...\n\n" +
+					"... wait ... is that a TV???\n\n" +
+					"I think I see silhouettes, could be guards, I'd better go back!\n\n" +
+					"[Press R to Return]";
 
+		if 		(Input.GetKeyDown(KeyCode.R)) 	{myState = States.corridor_0;}
 	}
 
 	void stairs_1() {
+		text.text = "TV's still on ... Better not risk it.\n\n" +
+					"[Press R to Return]";
 
+		if 		(Input.GetKeyDown(KeyCode.R)) 	{myState = States.corridor_1;}
 	}
 
 	void stairs_2() {
+		text.text = "OK .. stairs it is ... \n\n" +
+					"This is a terrible idea, I count at least two, maybe three silhouettes?\n\n" +
+					"[Press R to Return]";
 
+		if 		(Input.GetKeyDown(KeyCode.R)) 	{myState = States.corridor_2;}	
 	}
 	/*
 	 * End Scene 2
 	*/
+	#endregion
 }
