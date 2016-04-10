@@ -11,7 +11,7 @@ public class NumberWizard : MonoBehaviour {
     int guess;
 
     // Win condition
-    public int maxGuessesAllowed = 10;
+    public int maxGuessesAllowed = 5;
 
     // UI
     public Text guessText;
@@ -26,21 +26,26 @@ public class NumberWizard : MonoBehaviour {
         // Init game min/max variables
         max = 1000;
         min = 1;
-        NextGuess();
+        
+        // Init guess to a random num between min and max +1
+        // max + 1 because we want to include max in range
+        guess = Random.Range(min, max + 1);
+        guessText.text = guess.ToString();
+        
+        // Fixes rounding problem
+        max = max + 1;
     }
     
     // Calculate next guess
     void NextGuess() {
-        // Guess a random num between min and max +1
-        // max + 1 because we want to include max in range
-        guess = Random.Range(min, max + 1);
-        guessText.text = guess.ToString();
-
         // Check for win
         maxGuessesAllowed = maxGuessesAllowed - 1;
         if (maxGuessesAllowed <= 0) {
             SceneManager.LoadScene("Win");
         }
+        // Update guess
+        guess = (max + min) / 2;
+        guessText.text = guess.ToString();
     }
 
     public void GuessHigher() {
