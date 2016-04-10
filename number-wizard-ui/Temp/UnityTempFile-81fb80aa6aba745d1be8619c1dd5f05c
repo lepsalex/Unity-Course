@@ -5,8 +5,6 @@
 -r:/opt/Unity/Editor/Data/Managed/UnityEngine.dll
 -r:/opt/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll
 -r:/opt/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll
--r:/opt/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll
--r:/opt/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll
 -r:/opt/Unity/Editor/Data/Managed/UnityEditor.dll
 -define:UNITY_5_3_OR_NEWER
 -define:UNITY_5_3_4
@@ -80,5 +78,6 @@
 -define:UNITY_EDITOR_64
 -define:UNITY_EDITOR_LINUX
 Assets/Scripts/LevelManager.cs
+Assets/Scripts/NumberWizard.cs
 -r:/opt/Unity/Editor/Data/Mono/lib/mono/unity/System.Runtime.Serialization.dll
 -r:/opt/Unity/Editor/Data/Mono/lib/mono/unity/System.Xml.Linq.dll
