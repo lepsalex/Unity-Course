@@ -62,6 +62,8 @@ public class Brick : MonoBehaviour {
         // Handle if sprite is missing on lookup
         if (hitSprites[spriteIndex]) {
             this.GetComponent<SpriteRenderer>().sprite = hitSprites[spriteIndex];
+        } else {
+            Debug.LogError("Missing Brick Sprite!");
         }
     }
 
