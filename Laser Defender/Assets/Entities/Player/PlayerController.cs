@@ -5,6 +5,9 @@ public class PlayerController : MonoBehaviour {
 
     public float speed = 10f;
     public float padding = 1f;
+    public float projectileSpeed = 10f;
+    public float firingRate = 0.2f;
+    public GameObject projectile;
 
     private float xmin;
     private float xmax;
@@ -17,12 +20,25 @@ public class PlayerController : MonoBehaviour {
         xmin = leftmost.x + padding;
         xmax = rightmost.x - padding;
     }
+
+    void Fire () {
+        GameObject beam = Instantiate(projectile, transform.position, Quaternion.identity) as GameObject;
+        beam.GetComponent<Rigidbody2D>().velocity = new Vector3(0f, projectileSpeed, 0f);
+    }
 	
 	// Update is called once per frame
 	void Update () {
 
+        // Fire laser on space
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            InvokeRepeating("Fire", 0.000001f, firingRate);
+        }
+        if (Input.GetKeyUp(KeyCode.Space)) {
+            CancelInvoke("Fire");
+        }
+
         // Move on left/right arrows
-	    if (Input.GetKey(KeyCode.LeftArrow)) {
+        if (Input.GetKey(KeyCode.LeftArrow)) {
             transform.position += Vector3.left * speed * Time.deltaTime;
         } else if (Input.GetKey(KeyCode.RightArrow)) {
             transform.position += Vector3.right * speed * Time.deltaTime;
