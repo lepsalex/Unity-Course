@@ -7,6 +7,16 @@ public class EnemyBehaviour : MonoBehaviour {
     public float health = 150f;
     public float projectileSpeed = 10f;
     public float shotsPerSecond = 0.5f;
+    public int scoreValue = 150;
+
+    public AudioClip fireSound;
+    public AudioClip deathSound;
+
+    private ScoreKeeper scoreKeeper;
+
+    void Start () {
+        scoreKeeper = GameObject.Find("Score").GetComponent<ScoreKeeper>();
+    }
 
     void Update () {
         // Update probability every update
@@ -17,9 +27,9 @@ public class EnemyBehaviour : MonoBehaviour {
     }
 
     void Fire () {
-        Vector3 startPosition = transform.position + new Vector3(0f, -0.5f, 0f);
-        GameObject missile = Instantiate(projectile, startPosition, Quaternion.identity) as GameObject;
+        GameObject missile = Instantiate(projectile, transform.position, Quaternion.identity) as GameObject;
         missile.GetComponent<Rigidbody2D>().velocity = new Vector3(0f, -projectileSpeed, 0f);
+        AudioSource.PlayClipAtPoint(fireSound, transform.position);
     }
 
 	void OnTriggerEnter2D (Collider2D collider) {
@@ -34,9 +44,15 @@ public class EnemyBehaviour : MonoBehaviour {
 
             // Destroy enemy if hit points are depleted
             if (health <= 0) {
-                Destroy(gameObject);
+                Die();
             }
         }
+    }
+
+    void Die () {
+        AudioSource.PlayClipAtPoint(deathSound, transform.position);
+        scoreKeeper.Score(scoreValue);
+        Destroy(gameObject);
     }
 
 }

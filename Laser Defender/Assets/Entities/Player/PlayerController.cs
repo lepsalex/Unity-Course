@@ -4,11 +4,14 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
     public float speed = 10f;
+    public float health = 250f;
     public float padding = 1f;
+
+    public GameObject projectile;
     public float projectileSpeed = 10f;
     public float firingRate = 0.2f;
-    public float health = 250f;
-    public GameObject projectile;
+
+    public AudioClip fireSound;
 
     private float xmin;
     private float xmax;
@@ -26,6 +29,7 @@ public class PlayerController : MonoBehaviour {
         Vector3 startPosition = transform.position + new Vector3(0f, 0.5f, 0f);
         GameObject beam = Instantiate(projectile, startPosition, Quaternion.identity) as GameObject;
         beam.GetComponent<Rigidbody2D>().velocity = new Vector3(0f, projectileSpeed, 0f);
+        AudioSource.PlayClipAtPoint(fireSound, transform.position);
     }
 	
 	// Update is called once per frame
@@ -63,8 +67,14 @@ public class PlayerController : MonoBehaviour {
 
             // Destroy enemy if hit points are depleted
             if (health <= 0) {
-                Destroy(gameObject);
+                Die();
             }
         }
+    }
+
+    void Die () {
+        LevelManager man = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+        man.LoadLevel("End");
+        Destroy(gameObject);
     }
 }
