@@ -4,6 +4,9 @@ using System.Collections;
 [RequireComponent (typeof (Rigidbody2D))]
 public class Attacker : MonoBehaviour {
 
+    [Tooltip ("Average number of seconds between appearances (minimum 3 to work with random range)")]
+    public float seenEverySeconds;
+
     private float currentSpeed;
     private GameObject currentTarget;
     private Animator anim;
