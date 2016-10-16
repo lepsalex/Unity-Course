@@ -1,6 +1,15 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Defender : MonoBehaviour {
-	// Just used as a tag for now
+
+    private StarDisplay starDisplay;
+
+    void Start () {
+        starDisplay = GameObject.FindObjectOfType<StarDisplay>();
+    }
+	
+    public void AddStars (int amount) {
+        starDisplay.AddStars(amount);
+    }
 }
