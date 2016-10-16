@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Defender : MonoBehaviour {
 
+    public int starCost = 10;
+
     private StarDisplay starDisplay;
 
     void Start () {
