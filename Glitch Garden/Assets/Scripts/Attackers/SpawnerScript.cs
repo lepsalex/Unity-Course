@@ -27,9 +27,12 @@ public class SpawnerScript : MonoBehaviour {
         float randomDelay = Random.Range(spawnDelay - 3, spawnDelay + 3);
         yield return new WaitForSeconds(randomDelay);
 
+        // Spawn new attacker
         GameObject spawnedObject = Instantiate(attackerGameObject) as GameObject;
         spawnedObject.transform.parent = currentSpawner.transform;
         spawnedObject.transform.position = currentSpawner.transform.position;
+
+        // Set spawn location to not spawning to be started again
         isSpawning = false;
     }
 }

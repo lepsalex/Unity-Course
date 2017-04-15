@@ -33,18 +33,28 @@ public class GameTimer : MonoBehaviour {
 
         // Once level time is up (ie. Win Condition)
         if (Time.timeSinceLevelLoad >= levelSeconds && !userWon) {
-
-            userWon = true;
-
-            audioSource.Play();
-
-            if (winOverlay) {
-                winOverlay.SetActive(true);
-            }
-
-            Invoke("LoadNextLevel", audioSource.clip.length);
+            HandleWinCondition();
         }
-	}
+    }
+
+    void HandleWinCondition () {
+        // Set static win condition to true
+        userWon = true;
+
+        // Destroy all appropriate objects
+        DestroyAllTaggedObjects();
+
+        // Play win audio clip
+        audioSource.Play();
+
+        // Show the win overlay
+        if (winOverlay) {
+            winOverlay.SetActive(true);
+        }
+
+        // Go to next level after audio clip has finished playing
+        Invoke("LoadNextLevel", audioSource.clip.length);
+    }
 
     void LoadNextLevel () {
         levelManager.LoadNextLevel();
@@ -59,5 +69,13 @@ public class GameTimer : MonoBehaviour {
         }
 
         winOverlay.SetActive(false);
+    }
+
+    void DestroyAllTaggedObjects () {
+        GameObject[] taggedGameObjects = GameObject.FindGameObjectsWithTag("DestroyOnWin");
+
+        foreach (GameObject obj in taggedGameObjects) {
+            Destroy(obj);
+        }
     }
 }
