@@ -5,10 +5,10 @@ using UnityEngine;
 public class Pin : MonoBehaviour {
 
     public float standingThreshold = 5f;
-    public Rigidbody rigidBody;
     public float distToRaise = 60f;
+    public Rigidbody rigidBody;
 
-    public void Start () {
+    public void Awake () {
         rigidBody = GetComponent<Rigidbody>();
     }
 

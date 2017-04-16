@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent (typeof(Ball))]
 
-public class DragLaunch : MonoBehaviour {
+public class BallDragLaunch : MonoBehaviour {
 
     private Vector3 dragStart, dragEnd;
     private float startTime, endTime;

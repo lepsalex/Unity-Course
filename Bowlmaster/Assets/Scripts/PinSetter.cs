@@ -7,6 +7,7 @@ public class PinSetter : MonoBehaviour {
 
     public int lastStandingCount = -1;
     public Text standingDisplay;
+    public GameObject pinSet;
 
     private Ball ball;
     private float lastChangeTime;
@@ -25,24 +26,16 @@ public class PinSetter : MonoBehaviour {
         }
     }
 
-    void OnTriggerExit (Collider other) {
-        GameObject target = other.gameObject;
-
-        if (target.GetComponent<Pin>()) {
-            Destroy(target);
-        }
-    }
-
     // Update is called once per frame
     void Update () {
         standingDisplay.text = CountStanding().ToString();
 
         if (ballEnteredBox) {
-            CheckStanding();
+            UpdateStandingCountAndSettle();
         }
 	}
 
-    void CheckStanding() {
+    void UpdateStandingCountAndSettle() {
         // Update the lastStandingCount
         int currentStanding = CountStanding();
         
@@ -104,6 +97,13 @@ public class PinSetter : MonoBehaviour {
     }
 
     public void RenewPins () {
-        Debug.Log("RENEW");
+        GameObject newPins = Instantiate(pinSet);
+
+        // Disable gravty for each of them (will be enabled by lower method)
+        foreach (Pin pin in GameObject.FindObjectsOfType<Pin>()) {
+            pin.rigidBody.useGravity = false;
+        }
+
+        newPins.transform.position += new Vector3(0, 60f, 0);
     }
 }
