@@ -104,6 +104,7 @@ public class PinSetter : MonoBehaviour {
             pin.rigidBody.useGravity = false;
         }
 
+        // Move pins to raised position
         newPins.transform.position += new Vector3(0, 60f, 0);
     }
 }
