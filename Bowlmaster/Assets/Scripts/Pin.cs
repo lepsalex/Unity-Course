@@ -30,8 +30,9 @@ public class Pin : MonoBehaviour {
             // Disable gravity
             rigidBody.useGravity = false;
 
-            // Raise pin
+            // Raise pin and reset rotation
             transform.Translate(new Vector3(0, distToRaise, 0), Space.World);
+            transform.rotation = Quaternion.Euler(270f, 0, 0);
         }
     }
 
