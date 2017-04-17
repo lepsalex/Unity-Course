@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class PinCounter : MonoBehaviour {
 
+    public Text standingDisplay;
+
     private GameManager gameManager;
     private bool ballOutOfPlay = false;
     private float lastChangeTime;
     private int lastStandingCount = -1;
     private int lastSettledCount = 10;
-
-    public Text standingDisplay;
 
     void Start() {
         gameManager = GameObject.FindObjectOfType<GameManager>();

@@ -7,14 +7,14 @@ public class ScoreDisplay : MonoBehaviour {
 
     public Text[] rollTexts, frameTexts;
 
-	public void FillRolls(List<int> rolls) {
-        string scoreString = FormatRolls(rolls);
-        for (int i = 0; i < scoreString.Length; i++) {
-            rollTexts[i].text = scoreString[i].ToString();
+    public void FillRolls(List<int> rolls) {
+        string scoresString = FormatRolls(rolls);
+        for (int i = 0; i < scoresString.Length; i++) {
+            rollTexts[i].text = scoresString[i].ToString();
         }
     }
 
-    public void FillFrames (List<int> frames) {
+    public void FillFrames(List<int> frames) {
         for (int i = 0; i < frames.Count; i++) {
             frameTexts[i].text = frames[i].ToString();
         }

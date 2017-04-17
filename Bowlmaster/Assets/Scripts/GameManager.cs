@@ -1,6 +1,6 @@
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
@@ -17,22 +17,26 @@ public class GameManager : MonoBehaviour {
     }
 
     public void Bowl(int pinFall) {
+        try {
+            rolls.Add(pinFall);
+            ball.Reset();
+            pinSetter.PerformAction(ActionMaster.NextAction(rolls));
+        } catch {
+            Debug.LogWarning("Bowl() failed");
+        }
 
-        // add bowl result to list of all bowls
-        rolls.Add(pinFall);
+        UpdateDisplay();
+    }
 
-        // Reset
-        ball.Reset();
-
-        // Perform the appropriate action ...
-        pinSetter.PerformAction(ActionMaster.NextAction(rolls));
-
+    public void UpdateDisplay() {
+        print(rolls.ToArray()[1]);
         // Fill roll card
         try {
             scoreDisplay.FillRolls(rolls);
             scoreDisplay.FillFrames(ScoreMaster.ScoreCumulative(rolls));
-        } catch {
-            Debug.LogWarning("Fill roll card functions failed");
+        }
+        catch {
+            Debug.LogWarning("UpdateDisplay() failed");
         }
     }
 

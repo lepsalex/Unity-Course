@@ -45,6 +45,9 @@ public class BallDragLaunch : MonoBehaviour {
 
             Vector3 launchVelocity = new Vector3(launchSpeedX, 0, launchSpeedZ);
 
+            // Test launch (STRIKE)
+            //Vector3 launchVelocity = new Vector3(0, 0, 400f);
+
             ball.Launch(launchVelocity);
         }
     }
