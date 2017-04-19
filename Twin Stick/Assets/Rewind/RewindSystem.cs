@@ -24,8 +24,8 @@ public class RewindSystem : MonoBehaviour {
     }
 
     private void PlayBack() {
-        // If we haven't used up our stack ...
-        if (keyFrames.Count >= 0) {
+        // If we haven't used up our stack and we are not in paused mode
+        if (keyFrames.Count >= 0 && !gameManager.paused) {
             rigidBody.isKinematic = true;
 
             // Pop the latest frame and move to that position (the rewind)
@@ -36,10 +36,13 @@ public class RewindSystem : MonoBehaviour {
     }
 
     private void Record () {
-        rigidBody.isKinematic = false;
+        // Do not record in paused mode ...
+        if (!gameManager.paused) {
+            rigidBody.isKinematic = false;
 
-        // Stack the next frame 
-        keyFrames.Push(new MyKeyFrame(Time.time, transform.position, transform.rotation));
+            // Stack the next frame 
+            keyFrames.Push(new MyKeyFrame(Time.time, transform.position, transform.rotation));
+        }
     }
 }
 
